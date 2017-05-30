@@ -6,9 +6,12 @@ from django.contrib import messages
 from .models import Product, User
 
 def index(request):
-    context = { 'user_wishlist': Product.objects.getUserList(request.session['user_id']),
-                'other_items': Product.objects.getOthersList(request.session['user_id']) }
-    return render(request, 'wishlist/index.html', context)
+    if 'user_id' in request.session:
+        context = { 'user_wishlist': Product.objects.getUserList(request.session['user_id']),
+                    'other_items': Product.objects.getOthersList(request.session['user_id']) }
+        return render(request, 'wishlist/index.html', context)
+    else:
+        return redirect('login:index')
 
 def addItem(request):
     if request.method == "GET":

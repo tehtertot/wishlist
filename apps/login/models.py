@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
+from datetime import date
 import bcrypt
 
 class UserManager(models.Manager):
@@ -23,6 +24,8 @@ class UserManager(models.Manager):
             errors.append("Passwords do not match")
         if postData['hired'] == "":
             errors.append("No hired date specified")
+        if postData['hired'] > str(date.today()):
+            errors.append("Hire date must be in the past")
 
         messages_to_views = {}
         if errors:
