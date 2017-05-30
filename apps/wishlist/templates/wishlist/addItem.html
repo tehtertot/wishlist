@@ -1,0 +1,20 @@
+{% extends 'wishlist/base.html' %}
+{% block pagetitle %}Add Item{% endblock %}
+{% block main %}
+  <h3>Create a New Wish List Item</h3>
+  {% if messages %}
+    <div class="errors">
+    {% for message in messages %}
+      <p>{{message}}</p>
+    {% endfor %}
+    </div>
+  {% endif %}
+  <form class="" action="{% url 'wishlist:addItem' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label>Item/Product: <input type="text" name="item" class="form-control"></label>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Create">&nbsp;&nbsp;
+    <a href="{% url 'wishlist:index' %}" class="btn btn-default">Cancel</a>
+  </form>
+{% endblock %}

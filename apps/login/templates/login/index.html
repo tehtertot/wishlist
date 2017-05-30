@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style media="screen">
+      body {width: 100%;}
+      .main {
+        margin: 10px 5px;
+        width: 40%;
+        padding: 5%; display: inline-block; vertical-align: top;}
+      .errors {color: red;}
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <legend>Register</legend>
+      {% if messages %}
+      <div class="errors">
+        {% for message in messages %}
+        {% ifequal message.tags "register error" %}
+        <p>{{message}}</p>
+        {% endifequal %}
+        {% endfor %}
+      </div>
+      {% endif %}
+      <form class="" action="{% url 'login:register' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Name: <input type="text" name="name" class="form-control"></label>
+        </div>
+        <div class="form-group">
+          <label>Username: <input type="text" name="username" class="form-control"></label>
+        </div>
+        <div class="form-group">
+          <label>Password: <input type="password" name="password" class="form-control"></label>
+          <p>*Password should be at least 8 characters</p>
+        </div>
+        <div class="form-group">
+          <label>Confirm Password: <input type="password" name="confirm" class="form-control"></label>
+        </div>
+        <div class="form-group">
+          <label>Date Hired: <input type="date" name="hired" class="form-control"></label>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Register">
+      </form>
+    </div>
+    <div class="main">
+      <legend>Sign In</legend>
+      {% if messages %}
+        <div class="errors">
+        {% for message in messages %}
+        {% ifequal message.tags "login error" %}
+          <p>{{message}}</p>
+        {% endifequal %}
+        {% endfor %}
+        </div>
+      {% endif %}
+      <form class="" action="{% url 'login:login' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Username: <input type="text" name="username" class="form-control"></label>
+        </div>
+        <div class="form-group">
+          <label>Password: <input type="password" name="password" class="form-control"></label>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Sign In">
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+{% extends 'wishlist/base.html' %}
+{% block pagetitle %}{{product.name}}{% endblock %}
+{% block main %}
+  <h2>{{product.name}}</h2>
+  <br>
+  <p>Users who added this product on their wish lists:</p>
+  {% for user in product.wishes.all %}
+    <p>{{user.name}}</p>
+  {% endfor %}
+  <br>
+  <a href="{% url 'wishlist:index'%}" class="btn btn-default">Back</a>
+{% endblock %}
